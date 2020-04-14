@@ -7,6 +7,13 @@
 <body>
   <script>
     // Your JavaScript goes here!
+    function random(number) { //Returns an integer n such that 0<=n<number
+      return Math.floor(Math.random()*number);
+    }
+    function computerPlay() {
+      let possibleMoves = ['Rock', 'Paper', 'Scissors'];
+      return possibleMoves[random(3)];
+    }
   </script>
 </body>
 </html>
