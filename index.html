@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
-  <meta charset="UTF-8"/>
+    <title>Page Title</title>
+    <meta charset="UTF-8"/>
 </head>
 <body>
-  <script>
-    // Your JavaScript goes here!
-    function random(number) { //Returns an integer n such that 0<=n<number
-      return Math.floor(Math.random()*number);
-    }
-    function computerPlay() {
-      let possibleMoves = ['Rock', 'Paper', 'Scissors'];
-      return possibleMoves[random(3)];
-    }
-  </script>
+    <script>
+        function random(number) { //Returns an integer n such that 0<=n<number
+            return Math.floor(Math.random()*number);
+        }
+        function computerPlay() {
+            let possibleMoves = ['Rock', 'Paper', 'Scissors'];
+            return possibleMoves[random(3)];
+        }
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase(); //normalise the case for user
+            switch (playerSelection) {
+                case 'rock':
+                    switch (computerSelection) {
+                        case 'Rock':
+                            return`Tie! You both chose Rock!`;
+                            break;
+                        case 'Paper':
+                            return`You lose! Paper beats Rock`;
+                            break;
+                        case 'Scissors':
+                            return`You win! Rock beats Scissors`;
+                            break;
+                    }
+                    break;
+                case 'paper':
+                    switch (computerSelection) {
+                        case 'Rock':
+                            return`You win! Paper beats Rock`;
+                            break;
+                        case 'Paper':
+                            return`Tie! You both chose Paper!`;
+                             break;
+                        case 'Scissors':
+                            return`You lose! Scissors beat Paper`;
+                            break;
+                    }
+                    break;
+                case 'scissors':
+                    switch (computerSelection) {
+                        case 'Rock':
+                            return`You lose! Rock beats Scissors`;
+                            break;
+                        case 'Paper':
+                            return`You win! Scissors beat Paper`;
+                             break;
+                        case 'Scissors':
+                            return`Tie! You both chose Scissors!`;
+                            break;
+                    }
+                    break;
+                default:
+                    return `Invalid choice, please enter rock, paper, or scissors`;
+            }
+        }
+    </script>
 </body>
 </html>
