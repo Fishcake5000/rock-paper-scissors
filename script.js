@@ -77,12 +77,12 @@ function playRound(e) {
     }
     if (computerScore+playerScore>=5) {
         if (playerScore>computerScore) {
-            score.textContent = `Well done, you won! \n 
+            score.textContent = `Well done, you won! 
                 You won ${playerScore} round${(playerScore===1) ? '' : 's'}, 
                 the computer won ${computerScore}`;
             score.style.color = 'green';
         } else {
-            score.textContent = `You lost, better luck next time \n 
+            score.textContent = `You lost, better luck next time. 
                 You won ${playerScore} round${(playerScore===1) ? '' : 's'}, 
                 the computer won ${computerScore}`;
             score.style.color = 'red';
