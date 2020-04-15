@@ -7,21 +7,29 @@ function computerPlay() {
     return possibleMoves[random(3)];
 }
 
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase(); //normalise the case for user
+function updateScore() {
+    score.textContent = `Player : ${playerScore} || Computer : ${computerScore}`;
+}
+
+function playRound(e) {
+    let playerSelection = e.target.id;
+    let computerSelection = computerPlay();
     switch (playerSelection) {
         case 'rock':
             switch (computerSelection) {
                 case 'Rock':
-                    return`Tie! You both chose Rock!`;
+                    result.textContent = `Tie! You both chose Rock!`;
+                    result.style.color = 'black';
                     break;
                 case 'Paper':
                     computerScore ++;
-                    return`You lose! Paper beats Rock`;
+                    result.textContent = `You lose! Paper beats Rock`;
+                    result.style.color = 'red';
                     break;
                 case 'Scissors':
                     playerScore ++;
-                    return`You win! Rock beats Scissors`;
+                    result.textContent = `You win! Rock beats Scissors`;
+                    result.style.color = 'green';
                     break;
             }
             break;
@@ -29,14 +37,17 @@ function playRound(playerSelection, computerSelection) {
             switch (computerSelection) {
                 case 'Rock':
                     playerScore ++;
-                    return`You win! Paper beats Rock`;
+                    result.textContent = `You win! Paper beats Rock`;
+                    result.style.color = 'green';
                     break;
                 case 'Paper':
-                    return`Tie! You both chose Paper!`;
-                     break;
+                    result.textContent = `Tie! You both chose Paper!`;
+                    result.style.color = 'black';
+                    break;
                 case 'Scissors':
                     computerScore ++;
-                    return`You lose! Scissors beat Paper`;
+                    result.textContent = `You lose! Scissors beat Paper`;
+                    result.style.color = 'red';
                     break;
             }
             break;
@@ -44,32 +55,39 @@ function playRound(playerSelection, computerSelection) {
             switch (computerSelection) {
                 case 'Rock':
                     computerScore ++;
-                    return`You lose! Rock beats Scissors`;
+                    result.textContent = `You lose! Rock beats Scissors`;
+                    result.style.color = 'red';
                     break;
                 case 'Paper':
                     playerScore ++;
-                    return`You win! Scissors beat Paper`;
+                    result.textContent = `You win! Scissors beat Paper`;
+                    result.style.color = 'green';
                      break;
                 case 'Scissors':
-                    return`Tie! You both chose Scissors!`;
+                    result.textContent = `Tie! You both chose Scissors!`;
+                    result.style.color = 'black';
                     break;
             }
             break;
-        default:
-            return `Invalid choice, please enter rock, paper, or scissors`;
     }
+    updateScore();
 }
 
-function game() {
+function startNewGame() {
     playerScore = 0;
     computerScore = 0;
-    while (playerScore + computerScore < 5) {
-        console.log( playRound(prompt('Choose rock, paper, or scissors'), computerPlay()) );
-    }
-    console.log((playerScore > computerScore) ? 'You win!' : 'You lose, better luck next time');
-    console.log(`You won ${playerScore} round${(playerScore===1) ? '' : 's'} the computer won ${computerScore}`);
+    updateScore();
+    result.textContent = '';
 }
 
-let playerScore;
-let computerScore;
-game();
+const playButtons = document.querySelectorAll('.play');
+playButtons.forEach(button => button.addEventListener('click',playRound));
+
+const newGame = document.querySelector('#newGame');
+newGame.addEventListener('click', startNewGame);
+
+const result = document.querySelector('#result');
+const score = document.querySelector('#score');
+
+let playerScore = 0;
+let computerScore = 0;
