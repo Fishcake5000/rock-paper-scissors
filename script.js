@@ -12,6 +12,11 @@ function updateScore() {
 }
 
 function playRound(e) {
+    if (computerScore+playerScore>=5) {
+        result.style.color = 'black';
+        result.textContent = `Please start a new game`;
+        return;
+    }
     let playerSelection = e.target.id;
     let computerSelection = computerPlay();
     switch (playerSelection) {
@@ -70,12 +75,27 @@ function playRound(e) {
             }
             break;
     }
-    updateScore();
+    if (computerScore+playerScore>=5) {
+        if (playerScore>computerScore) {
+            score.textContent = `Well done, you won! \n 
+                You won ${playerScore} round${(playerScore===1) ? '' : 's'}, 
+                the computer won ${computerScore}`;
+            score.style.color = 'green';
+        } else {
+            score.textContent = `You lost, better luck next time \n 
+                You won ${playerScore} round${(playerScore===1) ? '' : 's'}, 
+                the computer won ${computerScore}`;
+            score.style.color = 'red';
+        }
+    } else {
+        updateScore();
+    }
 }
 
 function startNewGame() {
     playerScore = 0;
     computerScore = 0;
+    score.style.color = 'black';
     updateScore();
     result.textContent = '';
 }
